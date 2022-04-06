@@ -7,14 +7,9 @@ import java.util.concurrent.Executor
 import java.util.concurrent.Executors
 
 class AppExecutors constructor(
-    private val diskIO: Executor,
-    private val mainThread: Executor
+    private val diskIO: Executor = Executors.newSingleThreadExecutor(),
+    private val mainThread: Executor = MainThreadExecutor()
 ) {
-
-    constructor() : this(
-        Executors.newSingleThreadExecutor(),
-        MainThreadExecutor()
-    )
 
     fun diskIO(): Executor = diskIO
 
@@ -28,3 +23,4 @@ class AppExecutors constructor(
         }
     }
 }
+
